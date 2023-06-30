@@ -27,11 +27,15 @@ const makeGraphQLRequest = async (query: string, variables = {}) => {
 //this query and the variable get passed to 'makeGraphQLRequest', which then makes a client request to our api URL which is connected to either our local graph base environment, or to our production graph base environment.
 //we return a user with all the things we defined in '/graphql/index.ts'
 export const getUser = (email: string) => {
+
+  client.setHeader('x-api-key', apiKey)
   return makeGraphQLRequest(getUserQuery, { email })
 }
 
 //the input is equal to what we want to pass to 'makeGraphQLRequest' which is the query and the variables defined in '/graphql/index.ts'
 export const createUser = (email: string, name: string, avatarUrl: string) => {
+  client.setHeader('x-api-key', apiKey)
+
   const variables = {
     input: {
       email,
